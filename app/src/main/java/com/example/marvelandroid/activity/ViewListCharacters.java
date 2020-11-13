@@ -1,6 +1,7 @@
 package com.example.marvelandroid.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 import com.example.marvelandroid.R;
 import com.example.marvelandroid.model.ModelCharacter;
 import com.example.marvelandroid.network.response.ResponseCharacter;
+import com.example.marvelandroid.network.response.ResponseImage;
 
 import java.io.InputStream;
 import java.net.URL;
@@ -59,8 +62,7 @@ public class ViewListCharacters  extends AppCompatActivity {
         marginImage.gravity = Gravity.CENTER;
 
         try {
-            InputStream is = (InputStream) new URL(img).getContent();
-            Drawable d = Drawable.createFromStream(is, "");
+            Drawable d = new ResponseImage(img).execute().get();
             ImageView image = new ImageView(this);
             image.setImageDrawable(d);
             image.setLayoutParams(marginImage);
@@ -109,19 +111,7 @@ public class ViewListCharacters  extends AppCompatActivity {
         new Thread() {
             public void run() {
                 try {
-                    ArrayList<LinearLayout> layouts = new ArrayList<LinearLayout>();
-
-                    ArrayList<ModelCharacter> list = new ResponseCharacter().getListCharacters();
-
-                    for (int i = 0; i < list.size(); i++) {
-                        layouts.add(montarElementoLinearLayoutInicio(list.get(i).getName(), list.get(i).getImage()));
-                        layouts.get(layouts.size() - 1).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                            }
-                        });
-                    }
+                    final ArrayList<ModelCharacter> list = new ResponseCharacter().getListCharacters();
 
                     LinearLayout.LayoutParams margin = new LinearLayout.LayoutParams
                             ((int) LinearLayout.LayoutParams.WRAP_CONTENT, (int) LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -135,39 +125,56 @@ public class ViewListCharacters  extends AppCompatActivity {
                             ((int) LinearLayout.LayoutParams.WRAP_CONTENT, (int) LinearLayout.LayoutParams.WRAP_CONTENT);
                     margin2.gravity = Gravity.CENTER;
 
-                    final LinearLayout layoutsAux = new LinearLayout(context);
-                    layoutsAux.setOrientation(LinearLayout.VERTICAL);
-                    layoutsAux.setLayoutParams(margin2);
-
                     float width = 0;
-                    boolean flag = false;
 
-                    for (int i = 0; i < layouts.size(); i++) {
-                        flag = false;
+                    for (int j = 0; j < list.size(); j++) {
+                        final int i = j;
+                        LinearLayout layoutAux = montarElementoLinearLayoutInicio(list.get(i).getName(), list.get(i).getImage());
+                        layoutAux.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ViewDetailsCharacter.setUrlId(list.get(i).getResourceURI());
+                                startActivity(new Intent(ViewListCharacters.this, ViewDetailsCharacter.class));
+                            }
+                        });
+
                         if (width + 520 < largura) {
-                            layout.addView(layouts.get(i));
+                            layout.addView(layoutAux);
                             width += 520;
                         } else {
-                            layoutsAux.addView(layout);
+                            final LinearLayout l = layout;
+                            handler.post(new Runnable() {
+                                public void run() {
+                                    try {
+                                        if(l.getParent() != null) {
+                                            ((ViewGroup)l.getParent()).removeView(l); // <- fix
+                                        }
+                                        linearLayoutListCharacters.addView(l);
+                                    }catch (Exception e) {
+                                        System.out.println();
+                                    }
+                                }
+                            });
                             layout = new LinearLayout(context);
                             layout.setOrientation(LinearLayout.HORIZONTAL);
                             layout.setLayoutParams(margin);
-                            width = 0;
-                            flag = true;
-                            i--;
+                            layout.addView(layoutAux);
+                            width = 520;
                         }
                     }
 
-                    if (!flag)
-                        layoutsAux.addView(layout);
-
+                    final LinearLayout l = layout;
                     handler.post(new Runnable(){
                         public void run(){
-                            if (layoutsAux.getChildCount() > 0)
+                            if(l.getParent() != null) {
+                                ((ViewGroup)l.getParent()).removeView(l);
+                            }
+                            linearLayoutListCharacters.addView(l);
+
+                            if (list.size() > 0)
                                 textViewLoading.setText("");
                             else
                                 textViewLoading.setText("Nenhum personagem encontrado");
-                            linearLayoutListCharacters.addView(layoutsAux);
                         }
                     });
                 } catch (Exception e) {
