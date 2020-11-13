@@ -116,7 +116,11 @@ public class ViewDetailsSerie extends AppCompatActivity {
                             }
                         });
                 } catch (Exception e) {
-                    Toast.makeText(context, "Ocorreu um erro ao carregar os personagens.", Toast.LENGTH_LONG).show();
+                    handler.post(new Runnable(){
+                        public void run() {
+                            Toast.makeText(context, "Essa série não foi encontrada.", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
         }.start();
