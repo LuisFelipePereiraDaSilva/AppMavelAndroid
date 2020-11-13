@@ -8,7 +8,7 @@ public class ModelCreator {
     private String image;
     private ArrayList<ModelComic> comics;
     private ArrayList<ModelSerie> series;
-    private ArrayList<ModelSerie> stories;
+    private ArrayList<ModelStorie> stories;
     private ArrayList<ModelEvent> events;
     private String resourceURI;
 
@@ -17,7 +17,7 @@ public class ModelCreator {
         this.resourceURI = resourceURI;
     }
 
-    public ModelCreator(String id, String name, String image, ArrayList<ModelComic> comics, ArrayList<ModelSerie> series, ArrayList<ModelSerie> stories, ArrayList<ModelEvent> events, String resourceURI) {
+    public ModelCreator(String id, String name, String image, ArrayList<ModelComic> comics, ArrayList<ModelSerie> series, ArrayList<ModelStorie> stories, ArrayList<ModelEvent> events, String resourceURI) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -68,11 +68,11 @@ public class ModelCreator {
         this.series = series;
     }
 
-    public ArrayList<ModelSerie> getStories() {
+    public ArrayList<ModelStorie> getStories() {
         return stories;
     }
 
-    public void setStories(ArrayList<ModelSerie> stories) {
+    public void setStories(ArrayList<ModelStorie> stories) {
         this.stories = stories;
     }
 
