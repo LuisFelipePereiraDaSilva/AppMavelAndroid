@@ -38,6 +38,10 @@ public class ViewDetailsCreator extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setTitle("Criador");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_details_creator);
         textViewLoading = (TextView) findViewById(R.id.textViewLoading);
         linearLayoutDetails = (LinearLayout) findViewById(R.id.linearLayoutDetails);

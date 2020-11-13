@@ -44,6 +44,9 @@ public class ViewDetailsCharacter extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_character);
 
+        getSupportActionBar().setTitle("Personagem");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         textViewLoading = (TextView) findViewById(R.id.textViewLoading);
         linearLayoutDetails = (LinearLayout) findViewById(R.id.linearLayoutDetails);
         imageView = (ImageView) findViewById(R.id.imageView);

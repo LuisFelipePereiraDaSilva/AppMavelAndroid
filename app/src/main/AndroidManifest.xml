@@ -19,12 +19,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ViewDetailsCharacter"></activity>
-        <activity android:name=".activity.ViewDetailsSerie"></activity>
-        <activity android:name=".activity.ViewDetailsStorie"></activity>
-        <activity android:name=".activity.ViewDetailsComic"></activity>
-        <activity android:name=".activity.ViewDetailsCreator"></activity>
-        <activity android:name=".activity.ViewDetailsEvent"></activity>
+        <activity android:name=".activity.ViewDetailsCharacter">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marvelandroid.activity.ViewDetailsCharacter" />
+        </activity>
+        <activity android:name=".activity.ViewDetailsSerie">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marvelandroid.activity.ViewDetailsSerie" />
+        </activity>
+        <activity android:name=".activity.ViewDetailsStorie">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marvelandroid.activity.ViewDetailsStorie" />
+        </activity>
+        <activity android:name=".activity.ViewDetailsComic">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marvelandroid.activity.ViewDetailsComic" />
+        </activity>
+        <activity android:name=".activity.ViewDetailsCreator">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marvelandroid.activity.ViewDetailsCreator" />
+        </activity>
+        <activity android:name=".activity.ViewDetailsEvent">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.marvelandroid.activity.ViewDetailsEvent" />
+        </activity>
     </application>
 
 </manifest>

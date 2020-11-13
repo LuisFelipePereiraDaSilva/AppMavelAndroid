@@ -41,6 +41,10 @@ public class ViewDetailsEvent extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setTitle("Evento");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_details_event);
         textViewLoading = (TextView) findViewById(R.id.textViewLoading);
         linearLayoutDetails = (LinearLayout) findViewById(R.id.linearLayoutDetails);

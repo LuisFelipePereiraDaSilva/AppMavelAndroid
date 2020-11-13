@@ -21,8 +21,6 @@ import com.example.marvelandroid.model.ModelCharacter;
 import com.example.marvelandroid.network.response.ResponseCharacter;
 import com.example.marvelandroid.network.response.ResponseImage;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +35,8 @@ public class ViewListCharacters  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_characters);
+
+        getSupportActionBar().setTitle("Início");
 
         textViewLoading = (TextView) findViewById(R.id.textViewLoading);
         linearLayoutListCharacters = (LinearLayout) findViewById(R.id.linearLayoutListCharacters);
