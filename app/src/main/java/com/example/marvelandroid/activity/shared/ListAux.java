@@ -99,7 +99,7 @@ public class ListAux {
         titleTextView.setText(titleList + ":");
         titleTextView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
         titleTextView.setTextColor(Color.rgb(0, 0, 0));
-        titleTextView.setPadding(10,10,10,10);
+        titleTextView.setPadding(0,10,10,10);
         titleTextView.setTypeface(null, Typeface.BOLD);
         titleTextView.setTextSize(16);
         titleTextView.setLayoutParams(marginTitle);
@@ -139,7 +139,7 @@ public class ListAux {
                         ViewDetailsComic.setUrlId(list.get(j).resourceURI);
                         context.startActivity(new Intent(context, ViewDetailsComic.class));
                     } else if (titleList.equals("Criadores")) {
-                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        ViewDetailsCreator.setUrlId(list.get(j).resourceURI);
                         context.startActivity(new Intent(context, ViewDetailsCreator.class));
                     } else if (titleList.equals("Eventos")) {
                         ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
