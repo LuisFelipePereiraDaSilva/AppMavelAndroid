@@ -142,13 +142,13 @@ public class ListAux {
                         ViewDetailsCreator.setUrlId(list.get(j).resourceURI);
                         context.startActivity(new Intent(context, ViewDetailsCreator.class));
                     } else if (titleList.equals("Eventos")) {
-                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        ViewDetailsEvent.setUrlId(list.get(j).resourceURI);
                         context.startActivity(new Intent(context, ViewDetailsEvent.class));
                     } else if (titleList.equals("Séries")) {
-                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        ViewDetailsSerie.setUrlId(list.get(j).resourceURI);
                         context.startActivity(new Intent(context, ViewDetailsSerie.class));
                     } else if (titleList.equals("Histórias")) {
-                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        ViewDetailsStorie.setUrlId(list.get(j).resourceURI);
                         context.startActivity(new Intent(context, ViewDetailsStorie.class));
                     }
                 }

@@ -14,7 +14,9 @@ import android.widget.Toast;
 import com.example.marvelandroid.R;
 import com.example.marvelandroid.activity.shared.ListAux;
 import com.example.marvelandroid.model.ModelComic;
+import com.example.marvelandroid.model.ModelEvent;
 import com.example.marvelandroid.network.response.ResponseComic;
+import com.example.marvelandroid.network.response.ResponseEvent;
 import com.example.marvelandroid.network.response.ResponseImage;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +48,8 @@ public class ViewDetailsEvent extends AppCompatActivity {
         textViewId = (TextView) findViewById(R.id.textViewId);
         textViewName = (TextView) findViewById(R.id.textViewName);
         textViewDescription = (TextView) findViewById(R.id.textViewDescription);
+        textViewStartDate = (TextView) findViewById(R.id.textViewStartDate);
+        textViewEndDate = (TextView) findViewById(R.id.textViewEndData);
 
         mountLayout();
     }
@@ -56,9 +60,9 @@ public class ViewDetailsEvent extends AppCompatActivity {
         new Thread() {
             public void run() {
                 try {
-                    final ModelComic comic = new ResponseComic().getComic(urlId);
+                    final ModelEvent event = new ResponseEvent().getEvent(urlId);
 
-                    if (comic != null) {
+                    if (event != null) {
                         final LinearLayout.LayoutParams marginImage = new LinearLayout.LayoutParams
                                 ((int) LinearLayout.LayoutParams.WRAP_CONTENT, (int) LinearLayout.LayoutParams.WRAP_CONTENT);
                         marginImage.width = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -68,7 +72,7 @@ public class ViewDetailsEvent extends AppCompatActivity {
                         handler.post(new Runnable(){
                             public void run(){
                                 try {
-                                    Drawable d = new ResponseImage(comic.getImage()).execute().get();
+                                    Drawable d = new ResponseImage(event.getImage()).execute().get();
                                     imageView.setBackgroundDrawable(d);
                                     imageView.setLayoutParams(marginImage);
                                 } catch (Exception e) {
@@ -76,21 +80,26 @@ public class ViewDetailsEvent extends AppCompatActivity {
                                     imageView.setLayoutParams(marginImage);
                                 }
 
-                                textViewId.setText(comic.getId());
+                                textViewId.setText(event.getId());
 
-                                textViewName.setText(comic.getName());
+                                textViewName.setText(event.getName());
 
-                                textViewDescription.setText(comic.getDescription());
+                                textViewDescription.setText(event.getDescription());
 
-                                linearLayoutDetails.addView(ListAux.mountListAuxSerie(context, comic.getSeries()));
+                                textViewStartDate.setText(event.getStartDate());
 
-                                linearLayoutDetails.addView(ListAux.mountListAuxCreator(context, comic.getCreators()));
+                                textViewEndDate.setText(event.getEndDate());
 
-                                linearLayoutDetails.addView(ListAux.mountListAuxCharacter(context, comic.getCharacters()));
+                                linearLayoutDetails.addView(ListAux.mountListAuxCreator(context, event.getCreators()));
 
-                                linearLayoutDetails.addView(ListAux.mountListAuxStorie(context, comic.getStories()));
+                                linearLayoutDetails.addView(ListAux.mountListAuxCharacter(context, event.getCharacters()));
 
-                                linearLayoutDetails.addView(ListAux.mountListAuxEvent(context, comic.getEvents()));
+                                linearLayoutDetails.addView(ListAux.mountListAuxStorie(context, event.getStories()));
+
+                                linearLayoutDetails.addView(ListAux.mountListAuxComic(context, event.getComics()));
+
+                                linearLayoutDetails.addView(ListAux.mountListAuxSerie(context, event.getSeries()));
+
 
                                 textViewLoading.setVisibility(View.INVISIBLE);
                             }
