@@ -69,7 +69,7 @@ public class ResponseCharacter {
             }
 
             JSONObject thumbnail = object.getJSONObject("thumbnail");
-            String image = thumbnail.getString("path") + "/portrait_xlarge." + thumbnail.getString("extension");
+            String image = thumbnail.getString("path") + "/portrait_incredible." + thumbnail.getString("extension");
 
             characters.add(new ModelCharacter(object.getString("id"), object.getString("name"), object.getString("description"),
                     image, comics, series, stories, events, object.getString("resourceURI")));
