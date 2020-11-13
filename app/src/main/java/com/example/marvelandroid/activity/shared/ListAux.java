@@ -1,6 +1,7 @@
 package com.example.marvelandroid.activity.shared;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -10,6 +11,13 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.marvelandroid.activity.ViewDetailsCharacter;
+import com.example.marvelandroid.activity.ViewDetailsComic;
+import com.example.marvelandroid.activity.ViewDetailsCreator;
+import com.example.marvelandroid.activity.ViewDetailsEvent;
+import com.example.marvelandroid.activity.ViewDetailsSerie;
+import com.example.marvelandroid.activity.ViewDetailsStorie;
+import com.example.marvelandroid.activity.ViewListCharacters;
 import com.example.marvelandroid.model.ModelCharacter;
 import com.example.marvelandroid.model.ModelComic;
 import com.example.marvelandroid.model.ModelCreator;
@@ -77,7 +85,7 @@ public class ListAux {
         return mountListAux(context, "Histórias", listAux);
     }
 
-    private static LinearLayout mountListAux(Context context, String titleList, ArrayList<ListAux> list) {
+    private static LinearLayout mountListAux(final Context context, final String titleList, final ArrayList<ListAux> list) {
 
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -120,6 +128,31 @@ public class ListAux {
             moreDetailsButton.setTextColor(Color.rgb(0, 0, 255));
             moreDetailsButton.setPadding(10,00,10,0);
             moreDetailsButton.setTextSize(14);
+            final int j = i;
+            moreDetailsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (titleList.equals("Personagens")) {
+                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        context.startActivity(new Intent(context, ViewDetailsCharacter.class));
+                    } else if (titleList.equals("Quandrinhos")) {
+                        ViewDetailsComic.setUrlId(list.get(j).resourceURI);
+                        context.startActivity(new Intent(context, ViewDetailsComic.class));
+                    } else if (titleList.equals("Criadores")) {
+                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        context.startActivity(new Intent(context, ViewDetailsCreator.class));
+                    } else if (titleList.equals("Eventos")) {
+                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        context.startActivity(new Intent(context, ViewDetailsEvent.class));
+                    } else if (titleList.equals("Séries")) {
+                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        context.startActivity(new Intent(context, ViewDetailsSerie.class));
+                    } else if (titleList.equals("Histórias")) {
+                        ViewDetailsCharacter.setUrlId(list.get(j).resourceURI);
+                        context.startActivity(new Intent(context, ViewDetailsStorie.class));
+                    }
+                }
+            });
             layoutAux.addView(moreDetailsButton);
 
             layout.addView(layoutAux);
