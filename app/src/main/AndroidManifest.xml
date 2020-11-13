@@ -12,13 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.ViewListCharacters">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ViewDetailsCharacter"></activity>
+        <activity android:name=".activity.ViewDetailsSerie"></activity>
+        <activity android:name=".activity.ViewDetailsStorie"></activity>
+        <activity android:name=".activity.ViewDetailsComic"></activity>
+        <activity android:name=".activity.ViewDetailsCreator"></activity>
+        <activity android:name=".activity.ViewDetailsEvent"></activity>
     </application>
 
 </manifest>
